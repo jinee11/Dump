@@ -20,6 +20,7 @@ public class Step8Controller {
 
     @RequestMapping(value = "/receipts", method = RequestMethod.GET)
     public String step8(Model model, DailyReportStep8 dailyReportStep8) {
+        model.addAttribute("tSheet", step8Service.getSummary());
         model.addAttribute("receiptsList", step8Service.getAllReceipts());
         return "/dailyReport/step8/receipts";
     }

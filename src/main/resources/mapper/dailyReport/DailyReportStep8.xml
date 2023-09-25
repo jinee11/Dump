@@ -167,5 +167,17 @@
         WHERE t.carSubmitTel = #{userId}
     </select>
 
+    <!-- 조회시 상세조건 드롭다운   -->
+    <select id="getDailyReportByCarNo" resultType="DailyReportStep8">
+        SELECT t.sheetID,
+        DATE_FORMAT(t.date, '%m.%d') as date,
+        t.CarNo, t.carSubmit, t.carSubmitTel, t.chk1,
+        s.sheetsubID, s.fromsite, s.tosite, s.item, s.Qty, s.Qtyup
+        FROM tsheet t
+        JOIN tSheet_sub s
+        ON t.sheetID = s.sheetID2
+        WHERE t.carNo = #{CarNo}
+    </select>
+
 
 </mapper>

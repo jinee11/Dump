@@ -77,6 +77,21 @@ public class Step8Service {
         return commonUtil.jsonFormatTransfer(searchReceiptsMap);  //스트링으로 변환해줌
     }
 
+    //조회시 상세조건 드롭다운
+    public List<DailyReportStep8> getSummary() {
+        // 1. login 정보 받아오기
+        HttpSession session = commonUtil.getSession();
+        Login loginData = (Login) session.getAttribute("loginInfo");
+
+        // 2. login id와 tSheet의 CarNo가 똑같은 tuple값을 tSheet에서 가져옴.
+        List<DailyReportStep8> tSheet = dailyReportStep8Mapper.getDailyReportByCarNo(loginData.getUserId());
+
+        // 로그로 DB 조회 결과 출력 (System.out.println 사용)
+//        System.out.println("DailyReport List tSheet: " + tSheet);
+
+        return tSheet;
+    }
+
 //    public List<DailyReportStep8> getReceipts() {
 //
 //        HttpSession session = commonUtil.getSession();

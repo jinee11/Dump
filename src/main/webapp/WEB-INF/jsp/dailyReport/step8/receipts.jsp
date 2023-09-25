@@ -3,6 +3,15 @@
          pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
 
+<%@ page import="java.util.Set" %>
+<%@ page import="java.util.HashSet" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.dispatch.dump.commonModule.db.dto.DailyReportStep8" %>
+<%
+    // 조회시 상세조건 드롭다운 /모델로부터 받은 데이터를 변수에 저장
+    List<DailyReportStep8> tSheet = (List<DailyReportStep8>) request.getAttribute("tSheet");
+%>
+
 <%
     //라디오 선택값 가져올 변수 선언
     String searchType = request.getParameter("searchType");
@@ -768,49 +777,69 @@
                     </div>
                 </li>
                 <li>
+                    <%
+                        Set<String> fromSiteValue = new HashSet();
+
+                         for(DailyReportStep8 data : tSheet)
+                         fromSiteValue.add(data.getFromsite());
+                                        %>
                     <label>상차지</label>
                     <div class="input-group select">
                         <input type="text" class="wp100 fromsiteAutocomplete trn" placeholder="상차지" name="fromsite"
                                id="fromsite" autocomplete="off" value="${!empty view ? view.fromsite : ''}">
                         <select class="fromsite " id="fromsiteBox" onchange="$.selectBoxChange(this.value, 'fromsite')">
-                            <option value="">전체</option>
-
-                            <option value="구디"
-                            >구디
-                            </option>
-
+                            <option value="전체">전체</option>
+                            <c:forEach var="fromsite" items="<%=fromSiteValue%>">
+                                <option value="${fromsite}">${fromsite}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
                 <li>
+                    <%
+                         Set<String> toSiteValue = new HashSet();
+
+                          for(DailyReportStep8 data : tSheet)
+                          toSiteValue.add(data.getTosite());
+                                                                    %>
                     <label>하차지</label>
                     <div class="input-group select">
                         <input type="text" class="wp100 tositeAuto complete trn" placeholder="하차지" name="tosite"
                                id="tosite" autocomplete="off" value="${!empty view ? view.tosite : ''}">
                         <select class="tosite " id="tositeBox" onchange="$.selectBoxChange(this.value, 'tosite')">
-                            <option value="">전체</option>
-
-                            <option value="지밸리">지밸리</option>
-
+                            <option value="전체">전체</option>
+                            <c:forEach var="tosite" items="<%=toSiteValue%>">
+                                <option value="${tosite}">${tosite}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
                 <li>
+                    <%
+                          Set<String> itemValue = new HashSet();
+
+                          for(DailyReportStep8 data : tSheet)
+                          itemValue.add(data.getItem());
+                                                %>
                     <label>품목</label>
                     <div class="input-group select">
                         <input type="text" class="wp100 itemAuto complete trn" placeholder="품목" name="item" id="item"
                                value="${!empty view ? view.item : ''}" autocomplete="off">
                         <select class="item " id="itemBox" onchange="$.selectBoxChange(this.value, 'item')">
-                            <option value="">전체</option>
-
-                            <option value="출퇴근"
-                            >출퇴근
-                            </option>
-
+                            <option value="전체">전체</option>
+                            <c:forEach var="item" items="<%=itemValue%>">
+                                <option value="${item}">${item}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
                 <li>
+                    <%
+                        Set<String> carNoValue = new HashSet();
+
+                        for(DailyReportStep8 data : tSheet)
+                        carNoValue.add(data.getCarNo());
+                                %>
                     <label>차량번호</label>
                     <div class="input-group select">
                         <input type="text" class="wp100 CarNoAuto complete trn" placeholder="차량번호"
@@ -819,10 +848,9 @@
                         <select class="CarNo " id="CarNoBox"
                                 onchange="$.selectBoxChange(this.value, 'CarNo')">
                             <option value="">전체</option>
-
-                            <option value="자차"
-                            >자차
-                            </option>
+                            <c:forEach var="carNo" items="<%=carNoValue%>">
+                                <option value="${carNo}">${carNo}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>

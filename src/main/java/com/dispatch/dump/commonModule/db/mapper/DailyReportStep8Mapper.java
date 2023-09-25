@@ -1,5 +1,6 @@
 package com.dispatch.dump.commonModule.db.mapper;
 
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep4;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep8;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep8OptionForm;
 //import com.dispatch.dump.commonModule.db.dto.DailyReportStep8Main;
@@ -24,5 +25,8 @@ public interface DailyReportStep8Mapper {
 
 
     List<DailyReportStep8> receiptsSearchConditionWithCnt(DailyReportStep8 dailyReportStep8);
+
+    //조회시 상세조건 드롭다운
+    List<DailyReportStep8> getDailyReportByCarNo(String carNo);
 
 }
